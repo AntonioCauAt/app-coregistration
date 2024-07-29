@@ -9,4 +9,4 @@ mkdir -p out_figs
 mkdir -p out_dir_report
 #mkdir -p out_dir2
 
-singularity exec --env FS_LICENSE=${FS_LICENSE} -e docker://brainlife/mne-freesurfer:7.3.2-1.2.1 python3 main.py
+singularity exec docker://brainlife/mne:1.2.1 python3 main.py
