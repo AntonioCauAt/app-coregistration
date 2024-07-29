@@ -9,5 +9,8 @@ mkdir -p out_figs
 mkdir -p out_dir_report
 #mkdir -p out_dir2
 
+# Install necessary libraries
+singularity exec --env FS_LICENSE=${FS_LICENSE} -e docker://brainlife/mne-freesurfer:7.3.2-1.2.1 pip install pyvistaqt ipywidgets
+
 #singularity exec docker://brainlife/mne:0.23dev python3 main.py
 singularity  exec --env FS_LICENSE=${FS_LICENSE} -e docker://brainlife/mne-freesurfer:7.3.2-1.2.1 python3 main.py
