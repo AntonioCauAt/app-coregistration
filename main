@@ -3,6 +3,9 @@
 #PBS -l walltime=01:00:00
 #PBS -l vmem=20gb
 
+set -x
+set -e
+
 # Make output directories
 mkdir -p out_dir
 mkdir -p out_figs
