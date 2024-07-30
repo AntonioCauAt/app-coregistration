@@ -48,12 +48,12 @@ coreg.fit_fiducials(verbose=True)
 coreg.fit_icp(n_iterations=6, nasion_weight=2.0, verbose=True)
 coreg.omit_head_shape_points(distance=5.0 / 1000)  # distance is in meters
 
-#fig = mne.viz.plot_alignment(info, trans=coreg.trans, **plot_kwargs)
+fig = mne.viz.plot_alignment(info, trans=coreg.trans, **plot_kwargs)
 
 # Ajustes finales de ICP y visualización
 #if config['final'] == True:
 coreg.fit_icp(n_iterations=20, nasion_weight=10.0, verbose=True)
-#fig = mne.viz.plot_alignment(info, trans=coreg.trans, **plot_kwargs)
+fig = mne.viz.plot_alignment(info, trans=coreg.trans, **plot_kwargs)
 #mne.viz.set_3d_view(fig, **view_kwargs)
 
 dists = coreg.compute_dig_mri_distances() * 1e3  # in mm
@@ -65,7 +65,7 @@ print(
 #os.save(coreg, '')
 # Generar y guardar un reporte de MNE
 report = mne.Report(title='Report')
-#report.add_figs_to_section(fig, captions='Alignment', section='Coregistration')
+report.add_figs_to_section(fig, captions='Alignment', section='Coregistration')
 report_path = os.path.join('out_dir_report', 'report.html')
 report.save(report_path, overwrite=True)
 
