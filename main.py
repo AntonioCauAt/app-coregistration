@@ -5,6 +5,7 @@ import mne
 from mne.coreg import Coregistration
 from mne.io import read_info
 import numpy as np
+import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
