@@ -48,13 +48,13 @@ coreg.fit_icp(n_iterations=6, nasion_weight=2.0, verbose=True)
 coreg.omit_head_shape_points(distance=5.0 / 1000)  # distance is in meters
 fig = mne.viz.plot_alignment(info, trans=coreg.trans, **plot_kwargs)
 
-if config['final'] == True:
-    coreg.fit_icp(n_iterations=20, nasion_weight=10.0, verbose=True)
-    fig = mne.viz.plot_alignment(info, trans=coreg.trans, **plot_kwargs)
-    mne.viz.set_3d_view(fig, **view_kwargs)
+#if config['final'] == True:
+coreg.fit_icp(n_iterations=20, nasion_weight=10.0, verbose=True)
+fig = mne.viz.plot_alignment(info, trans=coreg.trans, **plot_kwargs)
+mne.viz.set_3d_view(fig, **view_kwargs)
 
-    dists = coreg.compute_dig_mri_distances() * 1e3  # in mm
-    print(
+dists = coreg.compute_dig_mri_distances() * 1e3  # in mm
+print(
         f"Distance between HSP and MRI (mean/min/max):\n{np.mean(dists):.2f} mm "
         f"/ {np.min(dists):.2f} mm / {np.max(dists):.2f} mm"
     )
