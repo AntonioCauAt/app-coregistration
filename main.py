@@ -16,13 +16,13 @@ with open(__location__+'/config.json') as config_json:
 
 #Read the file in
 fname = config['mne']
-raw = mne.io.read_raw_fif(fname, preload=True)
+#raw = mne.io.read_raw_fif(fname, preload=True)
 
 #Read the subject
-subject = config['subject']
+subject = 'output'
 
 #Read the subject dir
-subj_dir = config['subj_dir']
+subj_dir = config['output']
 
 #read the information about the file of events
 info = read_info(fname)
