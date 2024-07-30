@@ -5,6 +5,9 @@ import mne
 from mne.coreg import Coregistration
 from mne.io import read_info
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 # Current path
 __location__ = os.path.realpath(
@@ -68,6 +71,6 @@ report = mne.Report(title='Report')
 report.add_figs_to_section(fig, captions='Alignment', section='Coregistration')
 report_path = os.path.join('out_dir_report', 'report.html')
 report.save(report_path, overwrite=True)
-
+fig.savefig(os.path.join('out_figs','coregistration.png'))
 
 
