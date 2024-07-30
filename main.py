@@ -15,7 +15,8 @@ with open(__location__+'/config.json') as config_json:
     config = json.load(config_json)
 
 #Read the file in
-fname_epo = config['epo']
+fname = config['mne']
+raw = mne.io.read_raw_fif(fname, preload=True)
 
 #Read the subject
 subject = config['subject']
@@ -24,7 +25,7 @@ subject = config['subject']
 subj_dir = config['subj_dir']
 
 #read the information about the file of events
-info = read_info(fname_epo)
+info = read_info(fname)
 
 #configure some parameters of visualization
 plot_kwargs = dict(
@@ -48,6 +49,7 @@ coreg.fit_icp(n_iterations=6, nasion_weight=2.0, verbose=True)
 coreg.omit_head_shape_points(distance=5.0 / 1000)  # distance is in meters
 fig = mne.viz.plot_alignment(info, trans=coreg.trans, **plot_kwargs)
 
+# Ajustes finales de ICP y visualización
 #if config['final'] == True:
 coreg.fit_icp(n_iterations=20, nasion_weight=10.0, verbose=True)
 fig = mne.viz.plot_alignment(info, trans=coreg.trans, **plot_kwargs)
@@ -58,4 +60,13 @@ print(
         f"Distance between HSP and MRI (mean/min/max):\n{np.mean(dists):.2f} mm "
         f"/ {np.min(dists):.2f} mm / {np.max(dists):.2f} mm"
     )
+
+#os.save(coreg, '')
+# Generar y guardar un reporte de MNE
+report = mne.Report(title='Report')
+report.add_figs_to_section(fig, captions='Alignment', section='Coregistration')
+report_path = os.path.join('out_dir_report', 'report.html')
+report.save(report_path, overwrite=True)
+
+
 
