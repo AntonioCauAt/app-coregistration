@@ -43,7 +43,7 @@ view_kwargs = dict(azimuth=45, elevation=90, distance=0.6, focalpoint=(0.0, 0.0,
 
 
 fiducials = "estimated"  # get fiducials from fsaverage
-coreg = mne.coreg(info, subject, subj_dir, fiducials=fiducials)
+coreg = mne.coreg(info, subject, subjects_dir, fiducials=fiducials)
 
 coreg.fit_fiducials(verbose=True)
 
