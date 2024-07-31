@@ -54,7 +54,7 @@ coreg.omit_head_shape_points(distance=5.0 / 1000)  # distance is in meters
 
 #fig = mne.viz.plot_alignment(info, trans=coreg.trans, **plot_kwargs)
 
-# Ajustes finales de ICP y visualización
+# ICP and visualization
 #if config['final'] == True:
 coreg.fit_icp(n_iterations=20, nasion_weight=10.0, verbose=True)
 #fig = mne.viz.plot_alignment(info, trans=coreg.trans, **plot_kwargs)
@@ -67,7 +67,7 @@ print(
     )
 
 #os.save(coreg, '')
-# Generar y guardar un reporte de MNE
+# MNE report
 report = mne.Report(title='Report')
 #report.add_figs_to_section(fig, captions='Alignment', section='Coregistration')
 report_path = os.path.join('out_dir_report', 'report.html')
