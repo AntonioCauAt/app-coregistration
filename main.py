@@ -20,7 +20,7 @@ with open(__location__+'/config.json') as config_json:
 
 # == CONFIG PARAMETERS ==
 fname        = config['mne']
-subjects_dir = config['output']
+subjects_dir = config['output'] # BEM
 
 subject = 'output'
 
