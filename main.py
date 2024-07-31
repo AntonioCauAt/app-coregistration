@@ -18,7 +18,7 @@ __location__ = os.path.realpath(
 with open(__location__+'/config.json') as config_json:
     config = json.load(config_json)
 
-# CONFIG PARAMETERS
+# == CONFIG PARAMETERS ==
 fname        = config['mne']
 subjects_dir = config['output']
 
@@ -43,7 +43,7 @@ view_kwargs = dict(azimuth=45, elevation=90, distance=0.6, focalpoint=(0.0, 0.0,
 
 
 fiducials = "estimated"  # get fiducials from fsaverage
-coreg = mne.coreg(info, subject, subjects_dir, fiducials=fiducials)
+coreg = mne.coreg.Coregistration(info, subject, subjects_dir, fiducials=fiducials)
 
 coreg.fit_fiducials(verbose=True)
 
@@ -64,6 +64,8 @@ print(
         f"/ {np.min(dists):.2f} mm / {np.max(dists):.2f} mm"
     )
 
+
+# == SAVE RESULTS ==
 
 # SAVE DATA (trans.fif)
 fname_trans=os.path.join('out_dir','cov.fif')
