@@ -66,7 +66,7 @@ print(
         f"/ {np.min(dists):.2f} mm / {np.max(dists):.2f} mm"
     )
 
-fname_trans=os.path.join('out_dir','trans.fif')
+fname_trans=os.path.join('out_dir','cov.fif')
 mne.write_trans(fname_trans, trans=coreg.trans)
 
 # MNE report
