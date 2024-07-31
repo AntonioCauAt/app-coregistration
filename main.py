@@ -66,7 +66,9 @@ print(
         f"/ {np.min(dists):.2f} mm / {np.max(dists):.2f} mm"
     )
 
-#os.save(coreg, '')
+fname_trans=os.path.join('out_dir','trans.fif')
+mne.write_trans(fname_trans, trans=coreg.trans)
+
 # MNE report
 report = mne.Report(title='Report')
 #report.add_figs_to_section(fig, captions='Alignment', section='Coregistration')
@@ -75,3 +77,4 @@ report.save(report_path, overwrite=True)
 #fig.savefig(os.path.join('out_figs','coregistration.png'))
 
 
+   
