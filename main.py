@@ -2,10 +2,10 @@
 import os
 import json
 import mne
-from mne.coreg import Coregistration
-from mne.io import read_info
+
 import numpy as np
 import pandas as pd
+
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -18,23 +18,20 @@ __location__ = os.path.realpath(
 with open(__location__+'/config.json') as config_json:
     config = json.load(config_json)
 
-#Read the file in
-fname = config['mne']
-#raw = mne.io.read_raw_fif(fname, preload=True)
+# CONFIG PARAMETERS
+fname        = config['mne']
+subjects_dir = config['output']
 
-#Read the subject
 subject = 'output'
 
-#Read the subject dir
-subj_dir = config['output']
 
-#read the information about the file of events
-info = read_info(fname)
+# Read the information about the file of events
+info = mne.io.read_info(fname)
 
-#configure some parameters of visualization
+# Configure some parameters of visualization
 plot_kwargs = dict(
     subject=subject,
-    subjects_dir=subj_dir,
+    subjects_dir=subjects_dir,
     surfaces="head-dense",
     dig=True,
     eeg=[],
@@ -44,8 +41,9 @@ plot_kwargs = dict(
 )
 view_kwargs = dict(azimuth=45, elevation=90, distance=0.6, focalpoint=(0.0, 0.0, 0.0))
 
+
 fiducials = "estimated"  # get fiducials from fsaverage
-coreg = Coregistration(info, subject, subj_dir, fiducials=fiducials)
+coreg = mne.coreg(info, subject, subj_dir, fiducials=fiducials)
 
 coreg.fit_fiducials(verbose=True)
 
@@ -66,15 +64,19 @@ print(
         f"/ {np.min(dists):.2f} mm / {np.max(dists):.2f} mm"
     )
 
+
+# SAVE DATA (trans.fif)
 fname_trans=os.path.join('out_dir','cov.fif')
 mne.write_trans(fname_trans, trans=coreg.trans)
 
-# MNE report
+# SAVE FIGURE
+#fig.savefig(os.path.join('out_figs','coregistration.png'))
+
+# SAVE REPORT
 report = mne.Report(title='Report')
 #report.add_figs_to_section(fig, captions='Alignment', section='Coregistration')
 report_path = os.path.join('out_dir_report', 'report.html')
 report.save(report_path, overwrite=True)
-#fig.savefig(os.path.join('out_figs','coregistration.png'))
 
 
    
