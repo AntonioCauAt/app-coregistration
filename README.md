@@ -10,15 +10,11 @@ Brainlife App to perform MRI<->head coregistration for epoched data using mne.co
 
 
 1) Input file is:
-
     * `meg/fif` meg data file
-
     * `output`  meeg data file
 
 2) Input parameters are:
-
 * `fiducials` Surface RAS coordinate system.
-
 * `on_defects` Surface is found to have topological defects.
 
 3) Ouput files are:
