@@ -18,7 +18,7 @@ Brainlife App to perform MRI<->head coregistration for epoched data using mne.co
 * `on_defects` Surface is found to have topological defects.
 
 3) Ouput files are:
-    * `Noise Covariance Matrix`
+    * Noise Covariance Matrix
     * a plot of the Trans Matrix
     * a html report
    
